@@ -25,16 +25,14 @@ def cpux2xcsoar(cupx_file):
     cupx_file_extracted_path = temp_dir.name + '/' + '_' + cupx_file_name + '.extracted'
 
     # binwalk cupx_file and extract all files
-    for module in binwalk.scan(cupx_file_path, quiet=True, signature=True, extract=True):
-        pass
+    binwalk.scan(cupx_file_path, quiet=True, signature=True, extract=True)
 
     # look for points.cup file without case sensitivity
     for filename in os.listdir(cupx_file_extracted_path):
         if re.search(r"points.cup", filename, re.IGNORECASE):
             cup_file = filename
 
-    # Takes a POINTS.CUP file in cupx format and converts it to a waypoints_details
-    # file.
+    # Takes a POINTS.CUP file in cupx format and converts it to a waypoints_details file.
     input_file = open(cupx_file_extracted_path + "/" + cup_file, 'r')
 
     # convert to unix line format
@@ -43,8 +41,7 @@ def cpux2xcsoar(cupx_file):
     input_file_content = input_file_content.replace('\r', '\n')
 
     # create output directory
-    if not os.path.exists("output"):
-        os.makedirs("output")
+    os.makedirs("output", exist_ok=True)
 
     cup_unix_file = open("output" + '/' + cupx_file_name + ".cup", 'w')
     cup_unix_file.write(input_file_content)
@@ -54,33 +51,31 @@ def cpux2xcsoar(cupx_file):
 
     # create output sub directories
     for subdir in ["pics", "docs"]:
-        if not os.path.exists("output" + "/" + subdir):
-            os.makedirs("output" + "/" + subdir)
+        os.makedirs("output" + "/" + subdir, exist_ok=True)
 
     # Create a corresponding waypoints_details file
     with open(cup_unix_file, 'r') as csv_in_file:
         csv_reader = csv.reader(csv_in_file)
-        output_file = open(csv_in_file.name.replace(".cupx.cup", ".wp_details.txt"), 'w')
-        for row in csv_reader:
-            # skip the cup header: "name,code,country,lat,lon,elev,style,rwdir,rwlen,rwwidth,freq,desc,userdata,pics"
-            if csv_reader.line_num == 1:
-                try:
-                    pics_idx = row.index("pics")
-                    code_idx = row.index("code")
-                except:
-                    pics_idx = None
-                continue
-            # bullet proofing: if the field "pics" does not exist skip the row
-            if pics_idx is not None:
-                output_file.write("[" + row[code_idx] + "]\n")
-                for item in row[pics_idx].split(';'):
-                    if '.jpg' in item:
-                        shutil.copy(cupx_file_extracted_path + "/Pics/" + item, "output/pics/")
-                        output_file.write("image=pics/" + item + "\n")
-                    if '*.pdf' in item:
-                        shutil.copy(cupx_file_extracted_path + "/Docs/" + item, "output/docs/")
-                        output_file.write("file=docs/" + item + "\n")
-        output_file.close()
+        with open(csv_in_file.name.replace(".cupx.cup", ".wp_details.txt"), 'w') as output_file:
+            for row in csv_reader:
+                # skip the cup header: "name,code,country,lat,lon,elev,style,rwdir,rwlen,rwwidth,freq,desc,userdata,pics"
+                if csv_reader.line_num == 1:
+                    try:
+                        pics_idx = row.index("pics")
+                        code_idx = row.index("code")
+                    except:
+                        pics_idx = None
+                    continue
+                # bullet proofing: if the field "pics" does not exist skip the row
+                if pics_idx is not None:
+                    output_file.write("[" + row[code_idx] + "]\n")
+                    for item in row[pics_idx].split(';'):
+                        if '.jpg' in item:
+                            shutil.copy(cupx_file_extracted_path + "/Pics/" + item, "output/pics/")
+                            output_file.write("image=pics/" + item + "\n")
+                        if '*.pdf' in item:
+                            shutil.copy(cupx_file_extracted_path + "/Docs/" + item, "output/docs/")
+                            output_file.write("file=docs/" + item + "\n")
     # delete temporary directory
     shutil.rmtree(temp_dir)
 
