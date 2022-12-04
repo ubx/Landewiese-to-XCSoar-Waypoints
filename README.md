@@ -1,0 +1,25 @@
+# Landewiese to XCSoar Waipoints and Waypoint details
+
+Exctract [CUPX](https://downloads.naviter.com/docs/SeeYou_CUPX_file_format.pdf) from Landewise zip-file(s)
+and format to consistent [CUP](https://downloads.naviter.com/docs/SeeYou_CUP_file_format.pdf) and
+XCSoar [Waypoint Details, (Chapter 14.5)](https://download.xcsoar.org/releases/7.28/XCSoar-manual.pdf) file,
+including the corresponding images.
+
+## How-to
+
+1. Clone project: `git clone https://github.com/ubx/Landewiese-to-XCSoar-Waypoints`
+2. Download zip-file(s), in CPUX format from [here](https://landewiesen.streckenflug.at//index.php?inc=cup). You need an
+   account.
+2. Copy zip-file(s) to `output/` folder
+3. Run `python convert [<name>]` .Default is *landewisen*
+4. In the `output/` folder you will find `<name>.cup`, `<name>_details.txt` and images in `pics/`
+5. Copy the above files into the XCSoar folder, dependent on your os:
+    * for Android
+    * for Linux
+    * for xxxx
+6. In XCSoar: **Config -> System -> Site File**, select *More Waypoints* (or *Watched Waypoints*):
+     `<name>.cup` an Waypoint details: `<name>_details.txt`
+
+### Note
+Installing `binwalk` semms to have problems, see https://github.com/ReFirmLabs/binwalk/issues/352
+
