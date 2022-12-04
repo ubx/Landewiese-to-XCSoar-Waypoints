@@ -13,10 +13,10 @@ including the corresponding images.
 2. Copy zip-file(s) to `output/` folder
 3. Run `python convert [<name>]` .Default is *landewisen*
 4. In the `output/` folder you will find `<name>.cup`, `<name>_details.txt` and images in `pics/`
-5. Copy the above files into the XCSoar folder, dependent on your os:
-    * for Android
-    * for Linux
-    * for xxxx
+5. Copy the above files into the XCSoar folder, dependent on your os and version:
+    * for Android: `Android/data/org.xcsoar/files`
+    * for Linux: `.xcsoar`
+    * for Windows: ?
 6. In XCSoar: **Config -> System -> Site File**, select *More Waypoints* (or *Watched Waypoints*):
      `<name>.cup` an Waypoint details: `<name>_details.txt`
 
