@@ -1,4 +1,4 @@
-# Landewiese to XCSoar Waipoints and Waypoint details
+# Landewiesen to XCSoar Waipoints and Waypoint details
 
 Exctract [CUPX](https://downloads.naviter.com/docs/SeeYou_CUPX_file_format.pdf) from Landewise zip-file(s)
 and format to consistent [CUP](https://downloads.naviter.com/docs/SeeYou_CUP_file_format.pdf) and
