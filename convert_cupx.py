@@ -78,4 +78,4 @@ def cpux2xcsoar(cupx_file):
 
 
 if __name__ == '__main__':
-    cpux2xcsoar(sys.argv[1])
+    cpux2xcsoar(sys.argv[1]) if len(sys.argv > 0) else print('no cupx-file specified')
