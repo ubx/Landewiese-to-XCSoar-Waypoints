@@ -67,12 +67,12 @@ def cpux2xcsoar(cupx_file):
                 if pics_idx is not None:
                     output_file.write('[{}]\n'.format(row[code_idx]))
                     for item in row[pics_idx].split(';'):
-                        if item.endswith('.jpg'):
-                            shutil.copy('{}/Pics/{}'.format(cupx_file_extracted_path, item), 'output/pics/')
-                            output_file.write('image=pics/{}\n'.format(item))
-                        if item.endswith('.pdf'):
-                            shutil.copy('{}/Docs/{}'.format(cupx_file_extracted_path, item), 'output/docs/')
-                            output_file.write('image=docs/{}\n'.format(item))
+                        for dir_ext in [['Pics', '.jpg'], ['Docs', '.pdf']]:
+                            if item.endswith(dir_ext[1]):
+                                shutil.copy('{}/{}/{}'.format(cupx_file_extracted_path, dir_ext[0], item),
+                                            'output/{}/'.format(dir_ext[0].lower()))
+                                output_file.write('image={}/{}\n'.format(dir_ext[0], item))
+
     # delete temporary directory
     shutil.rmtree(temp_dir)
 
