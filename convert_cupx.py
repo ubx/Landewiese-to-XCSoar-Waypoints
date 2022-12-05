@@ -36,25 +36,21 @@ def cpux2xcsoar(cupx_file):
     input_file = open(cupx_file_extracted_path + "/" + cup_file, 'r')
 
     # convert to unix line format
-    input_file_content = input_file.read()
-    input_file_content = input_file_content.replace('\r\n', '\n')
-    input_file_content = input_file_content.replace('\r', '\n')
+    input_file_content = input_file.read().replace('\r\n', '\n').replace('\r', '\n')
 
     # create output directory
     os.makedirs("output", exist_ok=True)
 
-    cup_unix_file = open("output" + '/' + cupx_file_name + ".cup", 'w')
-    cup_unix_file.write(input_file_content)
-    cup_unix_file.close()
-
-    cup_unix_file = "output" + '/' + cupx_file_name + ".cup"
+    CUP_FILENAME = "output" + '/' + cupx_file_name + ".cup"
+    with open(CUP_FILENAME, 'w') as cup_unix_file:
+        cup_unix_file.write(input_file_content)
 
     # create output sub directories
     for subdir in ["pics", "docs"]:
         os.makedirs("output" + "/" + subdir, exist_ok=True)
 
     # Create a corresponding waypoints_details file
-    with open(cup_unix_file, 'r') as csv_in_file:
+    with open(CUP_FILENAME, 'r') as csv_in_file:
         csv_reader = csv.reader(csv_in_file)
         with open(csv_in_file.name.replace(".cupx.cup", ".wp_details.txt"), 'w') as output_file:
             for row in csv_reader:
