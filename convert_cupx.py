@@ -28,9 +28,11 @@ def cpux2xcsoar(cupx_file):
     binwalk.scan(cupx_file_path, quiet=True, signature=True, extract=True)
 
     # look for points.cup file without case sensitivity
+    cup_file = None
     for filename in os.listdir(cupx_file_extracted_path):
         if re.search(r"points.cup", filename, re.IGNORECASE):
             cup_file = filename
+            break
 
     # Takes a POINTS.CUP file in cupx format and converts it to a waypoints_details file.
     input_file = open(cupx_file_extracted_path + "/" + cup_file, 'r')
@@ -66,10 +68,10 @@ def cpux2xcsoar(cupx_file):
                 if pics_idx is not None:
                     output_file.write("[" + row[code_idx] + "]\n")
                     for item in row[pics_idx].split(';'):
-                        if '.jpg' in item:
+                        if item.endswith('.jpg'):
                             shutil.copy(cupx_file_extracted_path + "/Pics/" + item, "output/pics/")
                             output_file.write("image=pics/" + item + "\n")
-                        if '*.pdf' in item:
+                        if item.endswith('.pdf'):
                             shutil.copy(cupx_file_extracted_path + "/Docs/" + item, "output/docs/")
                             output_file.write("file=docs/" + item + "\n")
     # delete temporary directory
