@@ -27,4 +27,4 @@ def combine(out_fb):
 
 
 if __name__ == '__main__':
-    combine(sys.argv[1] if len(sys.argv) > 1 else 'combined_cup.cup')
+    combine(sys.argv[1] if len(sys.argv) > 1 else combine('combined_cup.cup'))
