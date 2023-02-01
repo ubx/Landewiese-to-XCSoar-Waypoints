@@ -10,7 +10,7 @@ including the corresponding images.
 1. Clone project: `git clone https://github.com/ubx/Landewiese-to-XCSoar-Waypoints`
 2. Download zip-file(s), in CPUX format from [here](https://landewiesen.streckenflug.at//index.php?inc=cup). You need an
    account.
-3. Copy zip-file(s) to `output/` folder
+3. Copy zip-file(s) to `data/` folder
 4. Run `python convert [<name>]`. Default name is *landewisen*
 5. In the `output/` folder you will find `<name>.cup`, `<name>_details.txt` and images in `pics/`
 6. Copy the above files into the XCSoar folder, dependent on your os and version:
@@ -22,5 +22,5 @@ including the corresponding images.
      `<name>.cup` an Waypoint details: `<name>_details.txt`
 
 ### Note
-Installing `binwalk` semms to have problems, see https://github.com/ReFirmLabs/binwalk/issues/352
+Installing `binwalk` seems to have problems, see https://github.com/ReFirmLabs/binwalk/issues/352
 
