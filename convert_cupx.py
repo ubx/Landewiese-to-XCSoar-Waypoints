@@ -69,9 +69,10 @@ def cpux2xcsoar(cupx_file):
                     for item in row[pics_idx].split(';'):
                         for dir_ext in [['Pics', '.jpg'], ['Docs', '.pdf']]:
                             if item.endswith(dir_ext[1]):
+                                dir_ext_lc = dir_ext[0].lower()
                                 shutil.copy('{}/{}/{}'.format(cupx_file_extracted_path, dir_ext[0], item),
-                                            'output/{}/'.format(dir_ext[0].lower()))
-                                output_file.write('image={}/{}\n'.format(dir_ext[0].lower(), item))
+                                            'output/{}/'.format(dir_ext_lc))
+                                output_file.write('image={}/{}\n'.format(dir_ext_lc, item))
 
     # delete temporary directory
     shutil.rmtree(temp_dir)
