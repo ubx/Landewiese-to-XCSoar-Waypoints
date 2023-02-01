@@ -16,6 +16,7 @@ including the corresponding images.
 6. Copy the above files into the XCSoar folder, dependent on your os and version:
     * for Android: `Android/data/org.xcsoar/files`
     * for Linux: `.xcsoar`
+    * for Kobo: `/mnt/onboard/XCSoarData`
     * for Windows: ?
 7. In XCSoar: **Config -> System -> Site File**, select *More Waypoints* (or *Watched Waypoints*):
      `<name>.cup` an Waypoint details: `<name>_details.txt`

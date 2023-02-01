@@ -71,7 +71,7 @@ def cpux2xcsoar(cupx_file):
                             if item.endswith(dir_ext[1]):
                                 shutil.copy('{}/{}/{}'.format(cupx_file_extracted_path, dir_ext[0], item),
                                             'output/{}/'.format(dir_ext[0].lower()))
-                                output_file.write('image={}/{}\n'.format(dir_ext[0], item))
+                                output_file.write('image={}/{}\n'.format(dir_ext[0].lower(), item))
 
     # delete temporary directory
     shutil.rmtree(temp_dir)
