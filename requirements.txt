@@ -1,2 +1,2 @@
 pandas~=1.5.1
-binwalk==2.1.0
+binwalk~=2.3.3+a555eb1
