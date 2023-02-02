@@ -75,7 +75,7 @@ def cpux2xcsoar(cupx_file):
                                 output_file.write('image={}\n'.format(os.path.join(dir_ext_lc, item)))
 
     # delete temporary directory
-    shutil.rmtree(temp_dir)
+    shutil.rmtree(temp_dir, ignore_errors=True)
 
 
 if __name__ == '__main__':
