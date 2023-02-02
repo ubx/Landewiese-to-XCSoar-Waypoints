@@ -9,8 +9,8 @@ import binwalk
 
 # Copied and adapted from https://github.com/lordfolken/xcsoar-cupx-converter. Many thank @lordfolken
 
-DATA_ROOT = 'data/'
-
+DATA = 'data'
+OUTPUT = 'output'
 
 def cpux2xcsoar(cupx_file):
     # generate temporary directory
@@ -20,8 +20,8 @@ def cpux2xcsoar(cupx_file):
     # copy cupx file into temporary directory
     cupx_file_name = os.path.basename(cupx_file)
     cupx_file_path = os.path.join(temp_dir, cupx_file_name)
-    shutil.copy(DATA_ROOT + cupx_file_name, cupx_file_path)
-    cupx_file_extracted_path = '{}/_{}.extracted'.format(temp_dir.name, cupx_file_name)
+    shutil.copy(os.path.join(DATA, cupx_file_name), cupx_file_path)
+    cupx_file_extracted_path = os.path.join(temp_dir.name, '_{}.extracted'.format(cupx_file_name))
 
     # binwalk cupx_file and extract all files
     binwalk.scan(cupx_file_path, quiet=True, signature=True, extract=True)
@@ -34,7 +34,7 @@ def cpux2xcsoar(cupx_file):
             break
 
     # Takes a POINTS.CUP file in cupx format and converts it to a waypoints_details file.
-    input_file = open('{}/{}'.format(cupx_file_extracted_path, cup_file), 'r')
+    input_file = open(os.path.join(cupx_file_extracted_path, cup_file), 'r')
 
     # convert to unix line format
     input_file_content = input_file.read().replace('\r\n', '\n').replace('\r', '\n')
@@ -42,13 +42,13 @@ def cpux2xcsoar(cupx_file):
     # create output directory
     os.makedirs('output', exist_ok=True)
 
-    CUP_FILENAME = 'output/{}.cup'.format(cupx_file_name)
+    CUP_FILENAME = os.path.join(OUTPUT, '{}.cup'.format(cupx_file_name))
     with open(CUP_FILENAME, 'w') as cup_unix_file:
         cup_unix_file.write(input_file_content)
 
     # create output sub directories
     for subdir in ['pics', 'docs']:
-        os.makedirs('output/{}'.format(subdir), exist_ok=True)
+        os.makedirs(os.path.join(OUTPUT, subdir), exist_ok=True)
 
     # Create a corresponding waypoints_details file
     with open(CUP_FILENAME, 'r') as csv_in_file:
@@ -70,9 +70,9 @@ def cpux2xcsoar(cupx_file):
                         for dir_ext in [['Pics', '.jpg'], ['Docs', '.pdf']]:
                             if item.endswith(dir_ext[1]):
                                 dir_ext_lc = dir_ext[0].lower()
-                                shutil.copy('{}/{}/{}'.format(cupx_file_extracted_path, dir_ext[0], item),
-                                            'output/{}/'.format(dir_ext_lc))
-                                output_file.write('image={}/{}\n'.format(dir_ext_lc, item))
+                                shutil.copy(os.path.join(cupx_file_extracted_path, dir_ext[0], item),
+                                            os.path.join(OUTPUT, dir_ext_lc, ''))
+                                output_file.write('image={}\n'.format(os.path.join(dir_ext_lc, item)))
 
     # delete temporary directory
     shutil.rmtree(temp_dir)

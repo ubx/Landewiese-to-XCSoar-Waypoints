@@ -1,7 +1,7 @@
 import csv
 import glob
 import sys
-
+import os
 import pandas as pd
 
 # credited:
@@ -9,21 +9,21 @@ import pandas as pd
 # https://github.com/ekapope/Combine-CSV-files-in-the-folder/blob/master/Combine_CSVs.py
 
 
-OUTPUT_ROOT = 'output/'
+OUTPUT = 'output'
 
 
 def combine(out_fb):
-    all_filenames = [i for i in glob.glob('*.{}'.format('cupx.cup'), root_dir=OUTPUT_ROOT)]
+    all_filenames = [i for i in glob.glob('*.{}'.format('cupx.cup'), root_dir=os.path.join(OUTPUT, ""))]
     print('Compined source files:')
     print(all_filenames)
 
     # combine all files in the list
-    combined_csv = pd.concat([pd.read_csv(OUTPUT_ROOT + f) for f in all_filenames])
+    combined_csv = pd.concat([pd.read_csv(os.path.join(OUTPUT, f)) for f in all_filenames])
     combined_csv.sort_values(by='name')
     # export to csv
     print('Combined file:')
     print(out_fb)
-    combined_csv.to_csv(OUTPUT_ROOT + out_fb, index=False, encoding='utf-8-sig', quoting=csv.QUOTE_MINIMAL)
+    combined_csv.to_csv(os.path.join(OUTPUT, out_fb), index=False, encoding='utf-8-sig', quoting=csv.QUOTE_MINIMAL)
 
 
 if __name__ == '__main__':
