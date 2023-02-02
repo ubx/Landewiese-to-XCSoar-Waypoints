@@ -23,4 +23,17 @@ including the corresponding images.
 
 ### Note
 Installing `binwalk` seems to have problems, see https://github.com/ReFirmLabs/binwalk/issues/352
+* Install on Linux
+```
+git clone https://github.com/ReFirmLabs/binwalk.git
+cd binwalk
+sudo python setup.py install
+```
 
+* Install on Windows
+```
+git clone https://github.com/CypherpunkSamurai/binwalk-win.git 
+cd .\binwalk-win\
+C:\Users\904906\PycharmProjects\Landewiese-to-XCSoar-Waypoints\venv\Scripts\python.exe  setup.py install
+```
+**todo** -- Is that correct ?
