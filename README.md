@@ -12,28 +12,30 @@ including the corresponding images.
    account.
 3. Copy zip-file(s) to `data/` folder
 4. Run `python convert [<name>]`. Default name is *landewisen*
-5. In the `output/` folder you will find `<name>.cup`, `<name>_details.txt` and images in `pics/`
-6. Copy the above files into the XCSoar folder, dependent on your os and version:
+5. **On Windows the ``temp``folder must be manually deletedt**
+6. In the `output/` folder you will find `<name>.cup`, `<name>_details.txt` and images in `pics/`
+7. Copy the above files into the XCSoar folder, dependent on your os and version:
     * for Android: `Android/data/org.xcsoar/files`
     * for Linux: `.xcsoar`
     * for Kobo: `/mnt/onboard/XCSoarData`
     * for Windows: ?
-7. In XCSoar: **Config -> System -> Site File**, select *More Waypoints* (or *Watched Waypoints*):
-     `<name>.cup` an Waypoint details: `<name>_details.txt`
+8. In XCSoar: **Config -> System -> Site File**, select *More Waypoints* (or *Watched Waypoints*):
+     `<name>.cup` v<an Waypoint details: `<name>_details.txt`
 
-### Note
+## Note on Binwalk
 Installing `binwalk` seems to have problems, see https://github.com/ReFirmLabs/binwalk/issues/352
-* Install on Linux
+
+### Install on Linux
 ```
 git clone https://github.com/ReFirmLabs/binwalk.git
 cd binwalk
 sudo python setup.py install
 ```
 
-* Install on Windows
+### Install on Windows
 ```
 git clone https://github.com/CypherpunkSamurai/binwalk-win.git 
 cd .\binwalk-win\
 C:\Users\904906\PycharmProjects\Landewiese-to-XCSoar-Waypoints\venv\Scripts\python.exe  setup.py install
 ```
-**todo** -- Is that correct ?
+Be sure the Windows `path` contains `jar.exe` (e.g. ``C:\Program Files\Java\jdk-19\bin``) and `unzip.exe` (e.g. download from here https://www.somacon.com/p161.php)
