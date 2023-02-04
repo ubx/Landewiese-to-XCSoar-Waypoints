@@ -34,11 +34,9 @@ def cpux2xcsoar(cupx_file):
             break
 
     # Takes a POINTS.CUP file in cupx format and converts it to a waypoints_details file.
-    cup_file = open(os.path.join(cupx_file_extracted_path, cup_file_name), 'r')
-
-    # convert to unix line format
-    input_file_content = cup_file.read().replace('\r\n', '\n').replace('\r', '\n')
-    cup_file.close()
+    with open(os.path.join(cupx_file_extracted_path, cup_file_name), 'r') as cup_file:
+        # convert to unix line format
+        input_file_content = cup_file.read().replace('\r\n', '\n').replace('\r', '\n')
 
     # create output directory
     os.makedirs('output', exist_ok=True)
