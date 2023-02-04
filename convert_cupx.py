@@ -9,18 +9,19 @@ import binwalk
 
 # Copied and adapted from https://github.com/lordfolken/xcsoar-cupx-converter. Many thank @lordfolken
 
-DATA = 'data'
-OUTPUT = 'output'
+DATA_DIR = 'data'
+OUTPUT_DIR = 'output'
+TEMP_DIR = 'temp'
 
 def cpux2xcsoar(cupx_file):
     # generate temporary directory
-    temp_dir = Path(__file__).resolve().parent / 'temp'
+    temp_dir = Path(__file__).resolve().parent / TEMP_DIR
     os.makedirs(temp_dir, exist_ok=True)
 
     # copy cupx file into temporary directory
     cupx_file_name = os.path.basename(cupx_file)
     cupx_file_path = os.path.join(temp_dir, cupx_file_name)
-    shutil.copy(os.path.join(DATA, cupx_file_name), cupx_file_path)
+    shutil.copy(os.path.join(DATA_DIR, cupx_file_name), cupx_file_path)
     cupx_file_extracted_path = os.path.join(temp_dir.name, '_{}.extracted'.format(cupx_file_name))
 
     # binwalk cupx_file and extract all files
@@ -36,18 +37,18 @@ def cpux2xcsoar(cupx_file):
     # Takes a POINTS.CUP file in cupx format and converts it to a waypoints_details file.
     with open(os.path.join(cupx_file_extracted_path, cup_file_name), 'r') as cup_file:
         # convert to unix line format
-        input_file_content = cup_file.read().replace('\r\n', '\n').replace('\r', '\n')
+        cup_file_content = cup_file.read().replace('\r\n', '\n').replace('\r', '\n')
 
     # create output directory
     os.makedirs('output', exist_ok=True)
 
-    CUP_FILENAME = os.path.join(OUTPUT, '{}.cup'.format(cupx_file_name))
+    CUP_FILENAME = os.path.join(OUTPUT_DIR, '{}.cup'.format(cupx_file_name))
     with open(CUP_FILENAME, 'w') as cup_unix_file:
-        cup_unix_file.write(input_file_content)
+        cup_unix_file.write(cup_file_content)
 
     # create output sub directories
     for subdir in ['pics', 'docs']:
-        os.makedirs(os.path.join(OUTPUT, subdir), exist_ok=True)
+        os.makedirs(os.path.join(OUTPUT_DIR, subdir), exist_ok=True)
 
     # Create a corresponding waypoints_details file
     with open(CUP_FILENAME, 'r') as csv_in_file:
@@ -70,12 +71,11 @@ def cpux2xcsoar(cupx_file):
                             if item.endswith(dir_ext[1]):
                                 dir_ext_lc = dir_ext[0].lower()
                                 shutil.copy(os.path.join(cupx_file_extracted_path, dir_ext[0], item),
-                                            os.path.join(OUTPUT, dir_ext_lc, ''))
+                                            os.path.join(OUTPUT_DIR, dir_ext_lc, ''))
                                 output_file.write('image={}\n'.format(os.path.join(dir_ext_lc, item)))
 
     # delete temporary directory
     shutil.rmtree(temp_dir, ignore_errors=True)
-
 
 if __name__ == '__main__':
     cpux2xcsoar(sys.argv[1]) if len(sys.argv > 0) else print('no cupx-file specified')
