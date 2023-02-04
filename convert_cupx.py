@@ -27,17 +27,18 @@ def cpux2xcsoar(cupx_file):
     binwalk.scan(cupx_file_path, quiet=True, signature=True, extract=True)
 
     # look for points.cup file without case sensitivity
-    cup_file = None
+    cup_file_name = None
     for filename in os.listdir(cupx_file_extracted_path):
         if re.search(r'points.cup', filename, re.IGNORECASE):
-            cup_file = filename
+            cup_file_name = filename
             break
 
     # Takes a POINTS.CUP file in cupx format and converts it to a waypoints_details file.
-    input_file = open(os.path.join(cupx_file_extracted_path, cup_file), 'r')
+    cup_file = open(os.path.join(cupx_file_extracted_path, cup_file_name), 'r')
 
     # convert to unix line format
-    input_file_content = input_file.read().replace('\r\n', '\n').replace('\r', '\n')
+    input_file_content = cup_file.read().replace('\r\n', '\n').replace('\r', '\n')
+    cup_file.close()
 
     # create output directory
     os.makedirs('output', exist_ok=True)
