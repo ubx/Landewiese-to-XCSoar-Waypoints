@@ -6,34 +6,34 @@ import zipfile
 import combine_cup as comb
 import convert_cupx as cnv
 
-DATA = 'data'
-OUTPUT = 'output'
+DATA_DIR = 'data'
+OUTPUT_DIR = 'output'
 
 
 def unzip():
-    all_filenames = [i for i in glob.glob('*.{}'.format('zip'), root_dir=os.path.join(DATA, ''))]
+    all_filenames = [i for i in glob.glob('*.{}'.format('zip'), root_dir=os.path.join(DATA_DIR, ''))]
     print('Input zip file(s):')
     print(all_filenames)
     for fn in all_filenames:
-        with zipfile.ZipFile(os.path.join(DATA, fn), 'r') as zip_ref:
-            zip_ref.extractall(os.path.join(DATA, ''))
+        with zipfile.ZipFile(os.path.join(DATA_DIR, fn), 'r') as zip_ref:
+            zip_ref.extractall(os.path.join(DATA_DIR, ''))
 
 
 def convert():
-    all_filenames = [i for i in glob.glob('*.{}'.format('cupx'), root_dir=os.path.join(DATA, ''))]
+    all_filenames = [i for i in glob.glob('*.{}'.format('cupx'), root_dir=os.path.join(DATA_DIR, ''))]
     print('Input cpux file(s):')
     print(all_filenames)
     for fn in all_filenames:
-        cnv.cpux2xcsoar(os.path.join(DATA, fn))
+        cnv.cpux2xcsoar(os.path.join(DATA_DIR, fn))
 
 
 def concat_wp_details(file_name):
-    all_filenames = [i for i in glob.glob('*.{}'.format('txt'), root_dir=os.path.join(OUTPUT, ''))]
+    all_filenames = [i for i in glob.glob('*.{}'.format('txt'), root_dir=os.path.join(OUTPUT_DIR, ''))]
     print('Input txt file(s):')
     print(all_filenames)
-    with open(os.path.join(OUTPUT, file_name), 'w') as outfile:
+    with open(os.path.join(OUTPUT_DIR, file_name), 'w') as outfile:
         for filename in all_filenames:
-            with open(os.path.join(OUTPUT, filename)) as infile:
+            with open(os.path.join(OUTPUT_DIR, filename)) as infile:
                 contents = infile.read()
                 outfile.write(contents)
 

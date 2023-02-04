@@ -7,18 +7,19 @@ including the corresponding images.
 
 ## How-to
 
-1. Clone project: `git clone https://github.com/ubx/Landewiese-to-XCSoar-Waypoints`
-2. Download zip-file(s), in CPUX format from [here](https://landewiesen.streckenflug.at//index.php?inc=cup). You need an
+1. Requires Python 3.10 or higher
+2. Clone project: `git clone https://github.com/ubx/Landewiese-to-XCSoar-Waypoints`
+3. Download zip-file(s), in CPUX format from [here](https://landewiesen.streckenflug.at//index.php?inc=cup). You need an
    account.
-3. Copy zip-file(s) to `data/` folder
-4. Run `python convert [<name>]`. Default name is *landewisen*
-5. In the `output/` folder you will find `<name>.cup`, `<name>_details.txt` and images in `pics/`
-6. Copy the above files into the XCSoar folder, dependent on your os and version:
+4. Copy zip-file(s) to `data/` folder
+5. Run `python convert [<name>]`. Default name is *landewisen*
+6. In the `output/` folder you will find `<name>.cup`, `<name>_details.txt` and images in `pics/`
+7. Copy the above files into the XCSoar folder, dependent on your os and version:
     * for Android: `Android/data/org.xcsoar/files`
     * for Linux: `.xcsoar`
     * for Kobo: `/mnt/onboard/XCSoarData`
     * for Windows: ?
-7. In XCSoar: **Config -> System -> Site File**, select *More Waypoints* (or *Watched Waypoints*):
+8. In XCSoar: **Config -> System -> Site File**, select *More Waypoints* (or *Watched Waypoints*):
      `<name>.cup` v<an Waypoint details: `<name>_details.txt`
 
 ## Note on Binwalk
