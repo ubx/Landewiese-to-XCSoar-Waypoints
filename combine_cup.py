@@ -13,7 +13,7 @@ OUTPUT_DIR = 'output'
 
 
 def combine(out_fb):
-    all_filenames = [i for i in glob.glob('*.{}'.format('cupx.cup'), root_dir=os.path.join(OUTPUT_DIR, ""))]
+    all_filenames = [i for i in glob.glob('*.cupx.cup', root_dir=os.path.join(OUTPUT_DIR, ""))]
     print('Combined source files:')
     print(all_filenames)
 

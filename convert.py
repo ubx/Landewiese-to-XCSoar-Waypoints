@@ -11,7 +11,7 @@ OUTPUT_DIR = 'output'
 
 
 def unzip():
-    all_filenames = [i for i in glob.glob('*.{}'.format('zip'), root_dir=os.path.join(DATA_DIR, ''))]
+    all_filenames = [i for i in glob.glob('*.zip', root_dir=os.path.join(DATA_DIR, ''))]
     print('Input zip file(s):')
     print(all_filenames)
     for fn in all_filenames:
@@ -20,7 +20,7 @@ def unzip():
 
 
 def convert():
-    all_filenames = [i for i in glob.glob('*.{}'.format('cupx'), root_dir=os.path.join(DATA_DIR, ''))]
+    all_filenames = [i for i in glob.glob('*.cupx', root_dir=os.path.join(DATA_DIR, ''))]
     print('Input cpux file(s):')
     print(all_filenames)
     for fn in all_filenames:
@@ -28,7 +28,7 @@ def convert():
 
 
 def concat_wp_details(file_name):
-    all_filenames = [i for i in glob.glob('*.{}'.format('txt'), root_dir=os.path.join(OUTPUT_DIR, ''))]
+    all_filenames = [i for i in glob.glob('*.txt', root_dir=os.path.join(OUTPUT_DIR, ''))]
     print('Input txt file(s):')
     print(all_filenames)
     with open(os.path.join(OUTPUT_DIR, file_name), 'w') as outfile:
