@@ -20,7 +20,7 @@ including the corresponding images.
     * for Kobo: `/mnt/onboard/XCSoarData`
     * for Windows: ?
 8. In XCSoar: **Config -> System -> Site File**, select *More Waypoints* (or *Watched Waypoints*):
-     `<name>.cup` v<an Waypoint details: `<name>_details.txt`
+     `<name>.cup` Waypoint details: `<name>_details.txt`
 
 ## Note on Binwalk
 Installing `binwalk` seems to have problems, see https://github.com/ReFirmLabs/binwalk/issues/352
