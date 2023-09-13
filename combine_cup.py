@@ -14,15 +14,13 @@ OUTPUT_DIR = 'output'
 
 def combine(out_fb):
     all_filenames = [i for i in glob.glob('*.cupx.cup', root_dir=os.path.join(OUTPUT_DIR, ""))]
-    print('Combined source files:')
-    print(all_filenames)
+    print('Combined source files:\n', all_filenames)
 
     # combine all files in the list
     combined_csv = pd.concat([pd.read_csv(os.path.join(OUTPUT_DIR, f)) for f in all_filenames])
     combined_csv.sort_values(by='name')
     # export to csv
-    print('Combined file:')
-    print(out_fb)
+    print('Combined file:\n', out_fb)
     combined_csv.to_csv(os.path.join(OUTPUT_DIR, out_fb), index=False, encoding='utf-8-sig', quoting=csv.QUOTE_MINIMAL)
 
 
