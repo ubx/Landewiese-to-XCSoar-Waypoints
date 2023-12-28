@@ -65,14 +65,18 @@ def cpux2xcsoar(cupx_file):
                     continue
                 # bullet proofing: if the field "pics" does not exist skip the row
                 if pics_idx is not None:
-                    output_file.write('[{}]\n'.format(row[code_idx]))
-                    for item in row[pics_idx].split(';'):
-                        for dir_ext in [['Pics', '.jpg'], ['Docs', '.pdf']]:
-                            if item.endswith(dir_ext[1]):
-                                dir_ext_lc = dir_ext[0].lower()
-                                shutil.copy(os.path.join(cupx_file_extracted_path, dir_ext[0], item),
-                                            os.path.join(OUTPUT_DIR, dir_ext_lc, ''))
-                                output_file.write('image={}\n'.format(os.path.join(dir_ext_lc, item)))
+                    try:
+                        output_file.write('[{}]\n'.format(row[code_idx]))
+                        for item in row[pics_idx].split(';'):
+                            for dir_ext in [['Pics', '.jpg'], ['Docs', '.pdf']]:
+                                if item.endswith(dir_ext[1]):
+                                    dir_ext_lc = dir_ext[0].lower()
+                                    shutil.copy(os.path.join(cupx_file_extracted_path, dir_ext[0], item),
+                                                os.path.join(OUTPUT_DIR, dir_ext_lc, ''))
+                                    output_file.write('image={}\n'.format(os.path.join(dir_ext_lc, item)))
+                    except:
+                        print('Line not parsed:\n', row, 'in file', csv_in_file.name)
+                        continue
 
     # delete temporary directory
     shutil.rmtree(temp_dir, ignore_errors=True)

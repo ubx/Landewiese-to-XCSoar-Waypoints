@@ -17,7 +17,7 @@ def combine(out_fb):
     print('Combined source files:\n', all_filenames)
 
     # combine all files in the list
-    combined_csv = pd.concat([pd.read_csv(os.path.join(OUTPUT_DIR, f)) for f in all_filenames])
+    combined_csv = pd.concat([pd.read_csv(os.path.join(OUTPUT_DIR, f), on_bad_lines='skip') for f in all_filenames])
     combined_csv.sort_values(by='name')
     # export to csv
     print('Combined file:\n', out_fb)
