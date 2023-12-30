@@ -73,7 +73,7 @@ def cpux2xcsoar(cupx_file):
                                     dir_ext_lc = dir_ext[0].lower()
                                     shutil.copy(os.path.join(cupx_file_extracted_path, dir_ext[0], item),
                                                 os.path.join(OUTPUT_DIR, dir_ext_lc, ''))
-                                    output_file.write('image={}\n'.format(os.path.join(dir_ext_lc, item)))
+                                    output_file.write('image={}/{}\n'.format(dir_ext_lc, item))
                     except:
                         print('Line not parsed:\n', row, 'in file', csv_in_file.name)
                         continue
