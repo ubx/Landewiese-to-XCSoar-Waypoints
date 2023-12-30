@@ -40,4 +40,4 @@ if __name__ == '__main__':
     convert()
     name = sys.argv[1] if len(sys.argv) > 1 else 'landewisen'
     comb.combine('{}.cup'.format(name))
-    concat_wp_details('{}_detatils.txt'.format(name))
+    concat_wp_details('{}_details.txt'.format(name))
