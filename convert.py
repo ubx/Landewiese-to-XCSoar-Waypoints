@@ -41,3 +41,5 @@ if __name__ == '__main__':
     name = sys.argv[1] if len(sys.argv) > 1 else 'landewiesen'
     comb.combine('{}.cup'.format(name))
     concat_wp_details('{}_details.txt'.format(name))
+    print('Waypoint details file: {}_details.txt\n'.format(name))
+
