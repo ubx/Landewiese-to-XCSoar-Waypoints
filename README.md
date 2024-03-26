@@ -12,7 +12,7 @@ including the corresponding images.
 3. Download zip-file(s), in CPUX format from [here](https://landewiesen.streckenflug.at//index.php?inc=cup). You need an
    account.
 4. Copy zip-file(s) to `data/` folder
-5. Run `python convert [<name>]`. Default name is *landewisen*
+5. Run `python convert [<name>]`. Default name is *landewiesen*
 6. In the `output/` folder you will find `<name>.cup`, `<name>_details.txt` and images in `pics/`
 7. Copy the above files into the XCSoar folder, dependent on your os and version:
     * for Android: `Android/data/org.xcsoar/files`

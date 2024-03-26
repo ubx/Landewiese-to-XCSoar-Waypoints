@@ -38,6 +38,6 @@ def concat_wp_details(file_name):
 if __name__ == '__main__':
     unzip()
     convert()
-    name = sys.argv[1] if len(sys.argv) > 1 else 'landewisen'
+    name = sys.argv[1] if len(sys.argv) > 1 else 'landewiesen'
     comb.combine('{}.cup'.format(name))
     concat_wp_details('{}_details.txt'.format(name))
